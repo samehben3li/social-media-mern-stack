@@ -8,39 +8,39 @@ export default function Left(){
             <div className="wrapper">
                 <ul className="list">
                     <li className="item">
-                        <div className="icon">F</div>
+                        <i class="fa-solid fa-rss icon"></i>
                         <span className="text">feed</span>
                     </li>
                     <li className="item">
-                        <div className="icon">C</div>
+                        <i class="fa-solid fa-message icon"></i>
                         <span className="text">chat</span>
                     </li>
-                    <li className="item">
+                    {/* <li className="item">
                         <div className="icon">V</div>
                         <span className="text">videos</span>
-                    </li>
+                    </li> */}
                     <li className="item">
-                        <div className="icon">G</div>
+                        <i class="fa-solid fa-people-group icon"></i>
                         <span className="text">groups</span>
                     </li>
                     <li className="item">
-                        <div className="icon">B</div>
+                        <i class="fa-solid fa-bookmark icon"></i>
                         <span className="text">bookmarks</span>
                     </li>
                     <li className="item">
-                        <div className="icon">Q</div>
+                        <i class="fa-solid fa-circle-info icon"></i>
                         <span className="text">questions</span>
                     </li>
                     <li className="item">
-                        <div className="icon">J</div>
-                        <span className="text">jobs</span>
+                        <i class="fa-solid fa-cart-shopping icon"></i>
+                        <span className="text">Shopping</span>
                     </li>
                     <li className="item">
-                        <div className="icon">E</div>
+                        <i class="fa-solid fa-calendar-check icon"></i>
                         <span className="text">events</span>
                     </li>
                     <li className="item">
-                        <div className="icon">C</div>
+                        <i class="fa-solid fa-graduation-cap icon"></i>
                         <span className="text">courses</span>
                     </li>
                 </ul>

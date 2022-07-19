@@ -12,31 +12,30 @@ export default function Topbar(){
         <div className="topbarContainer">
             <div className="topbarLeft">
                 <Link to="/" style={{textDecoration: "none"}}>
-                    <span className="logo">samehSocial</span>
+                    <span className="logo">KnowerSocial</span>
                 </Link>
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
-                    <span className="searchIcon">s</span>
+                    <i class="fa-solid fa-magnifying-glass searchIcon"></i>
                     <input placeholder="Search" className="searchInput" />
                 </div>
             </div>
             <div className="topbarRight">
                 <div className="links">
-                    <span className="link">Home</span>
-                    <span className="link">TimeLine</span>
+                    <Link to="/" className="link">Home</Link>
                 </div>
                 <div className="icons">
-                    <div className="iconeItem">
+                   {/*  <div className="iconeItem">
                         <span>Per</span>
                         <span className="iconBadge">1</span>
-                    </div>
+                    </div> */}
                     <div className="iconeItem">
-                        <span>chat</span>
+                        <i class="fa-solid fa-message iconImg"></i>
                         <span className="iconBadge">1</span>
                     </div>
                     <div className="iconeItem">
-                        <span>notifica</span>
+                        <i class="fa-solid fa-bell iconImg"></i>
                         <span className="iconBadge">1</span>
                     </div>
                 </div>

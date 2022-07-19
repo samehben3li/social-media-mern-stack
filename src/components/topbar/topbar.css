@@ -1,4 +1,4 @@
-.topbarContainer{
+.topbarContainer {
     height: 50px;
     width: 100%;
     background-color: #1877f2;
@@ -9,11 +9,11 @@
     z-index: 999;
 }
 
-.topbarLeft{
+.topbarLeft {
     flex: 3;
 }
 
-.logo{
+.logo {
     font-size: 24px;
     margin-left: 20px;
     font-weight: bold;
@@ -21,11 +21,11 @@
     cursor: pointer;
 }
 
-.topbarCenter{
+.topbarCenter {
     flex: 5;
 }
 
-.searchbar{
+.searchbar {
     width: 100%;
     height: 30px;
     background-color: white;
@@ -34,21 +34,23 @@
     align-items: center;
 }
 
-.searchIcon{
-    font-size: 20px;
+.searchIcon {
+    font-size: 18px;
     margin-left: 10px;
+    margin-right: 10px;
+    color: gray;
 }
 
-.searchInput{
+.searchInput {
     border: none;
     width: 70%;
 }
 
-.searchInput:focus{
+.searchInput:focus {
     outline: none;
 }
 
-.topbarRight{
+.topbarRight {
     flex: 4;
     display: flex;
     align-items: center;
@@ -56,23 +58,30 @@
     color: white;
 }
 
-.link{
+.link {
     margin-right: 10px;
     font-size: 14px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
     cursor: pointer;
 }
 
-.icons{
+.icons {
     display: flex;
 }
 
-.iconeItem{
+.iconeItem {
     margin-right: 15px;
     cursor: pointer;
     position: relative;
 }
 
-.iconBadge{
+.iconImg {
+    font-size: 20px;
+}
+
+.iconBadge {
     width: 15px;
     height: 15px;
     background-color: red;
@@ -87,7 +96,7 @@
     font-size: 12px;
 }
 
-.imgProfile{
+.imgProfile {
     width: 32px;
     height: 32px;
     border-radius: 50%;
