@@ -1,4 +1,6 @@
+import axios from "axios";
 import { useContext } from "react";
+import { Follow } from "../../context/AuthActions";
 import { AuthContext } from "../../context/AuthContext";
 import { Users } from "../../dummyData"
 import Online from "../online/Online";
@@ -6,7 +8,7 @@ import "./right.css"
 
 export default function Right({ user }) {
 
-    const {user:currentUser} = useContext(AuthContext)
+    const {user:currentUser,dispatch} = useContext(AuthContext)
 
     const HomeRight = () => {
         return(
@@ -26,10 +28,31 @@ export default function Right({ user }) {
     }
 
     const ProfileRight = () => {
+
+        const handleFollow = async () => {
+            if (currentUser.followings.includes(user._id)){
+                try {
+                    await axios.put("/users/"+user._id+"/unfollow",{userId: currentUser._id})
+                    currentUser.followings = currentUser.followings.filter(id=>id!==user._id)
+                    dispatch(Follow(currentUser))
+                } catch (err) {
+                    console.log(err)
+                }
+            }else{
+                try {
+                    await axios.put("/users/"+user._id+"/follow",{userId: currentUser._id})
+                    currentUser.followings = [...currentUser.followings,user._id]
+                    dispatch(Follow(currentUser))
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+        }
+
         return(
             <>
-                { user._id === currentUser._id &&
-                "btn flower"
+                { user._id !== currentUser._id &&
+                <button className="btnFollow" onClick={handleFollow}>{ currentUser.followings.includes(user._id) ? "Unfollow -" : "Follow +"  }</button>
                 }
                 <h4 className="rightTitle">User information</h4>
                 <div className="rightInfo">

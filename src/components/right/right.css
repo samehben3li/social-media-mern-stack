@@ -1,76 +1,88 @@
-.right{
+.right {
     flex: 3.5;
 }
 
-.rightWrapper{
+.rightWrapper {
     padding: 20px 20px 0 0;
 }
 
-.birthContainer{
+.birthContainer {
     display: flex;
     align-items: center;
 }
 
-.birthImg{
+.birthImg {
     width: 40px;
     height: 40px;
     margin-right: 10px;
 }
 
-.birthText{
+.birthText {
     font-weight: 300;
     font-size: 15px;
 }
 
-.rightTitle{
+.btnFollow {
+    padding: 5px 20px;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #1877f2;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.rightTitle {
     margin-bottom: 20px;
     margin-top: 20px;
 }
 
-.rightFriendList{
+.rightFriendList {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.rightTitle{
+.rightTitle {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-.rightInfo{
+.rightInfo {
     margin-bottom: 30px;
 }
 
-.infoItem{
+.infoItem {
     margin-bottom: 10px;
 }
 
-.infoKey{
+.infoKey {
     font-weight: 500;
     margin-right: 15px;
     color: #555;
 }
 
-.infoValue{
+.infoValue {
     font-weight: 300;
 }
 
-.followings{
+.followings {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.following{
+.following {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     cursor: pointer;
 }
 
-.followingImg{
+.followingImg {
     width: 100px;
     height: 100px;
     object-fit: cover;
