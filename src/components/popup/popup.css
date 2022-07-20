@@ -1,0 +1,35 @@
+.popupConatainer {
+    position: fixed;
+    top: -200px;
+    right: 10px;
+    background-color: #1877f2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: 0.5s all ease-in-out;
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    z-index: 2;
+}
+
+.popupConatainer.active {
+    top: 60px;
+}
+
+.popupItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.popupItem:first-child {
+    margin-top: 0;
+}
+
+.popupItemText {
+    font-size: 18px;
+    font-weight: 500;
+}

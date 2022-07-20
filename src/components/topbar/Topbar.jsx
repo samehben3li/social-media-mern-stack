@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext,useState } from "react";
 import { Link } from "react-router-dom"
 import { AuthContext } from '../../context/AuthContext';
+import Popup from "../popup/Popup";
 import "./topbar.css"
 
 export default function Topbar(){
 
+    const [activePopup, setActivePopup] = useState(false)
     const { user } =useContext(AuthContext)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
@@ -17,7 +19,7 @@ export default function Topbar(){
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
-                    <i class="fa-solid fa-magnifying-glass searchIcon"></i>
+                    <i className="fa-solid fa-magnifying-glass searchIcon"></i>
                     <input placeholder="Search" className="searchInput" />
                 </div>
             </div>
@@ -26,23 +28,22 @@ export default function Topbar(){
                     <Link to="/" className="link">Home</Link>
                 </div>
                 <div className="icons">
-                   {/*  <div className="iconeItem">
-                        <span>Per</span>
-                        <span className="iconBadge">1</span>
-                    </div> */}
                     <div className="iconeItem">
-                        <i class="fa-solid fa-message iconImg"></i>
+                        <i className="fa-solid fa-user-plus iconImg"></i>
                         <span className="iconBadge">1</span>
                     </div>
                     <div className="iconeItem">
-                        <i class="fa-solid fa-bell iconImg"></i>
+                        <i className="fa-solid fa-message iconImg"></i>
+                        <span className="iconBadge">1</span>
+                    </div>
+                    <div className="iconeItem">
+                        <i className="fa-solid fa-bell iconImg"></i>
                         <span className="iconBadge">1</span>
                     </div>
                 </div>
-                <Link to={`/profile/${user.username}`}>
-                    <img src={user.image ? PF+user.image : PF+"person/1.png"} alt="" className="imgProfile" />
-                </Link>
+                <img src={user.image ? PF+user.image : "/assets/default-avatar.jpg" } alt="" className="imgProfile" onClick={()=>setActivePopup(!activePopup)} />
             </div>
+            <Popup activePopup={activePopup} />
         </div>
     );
 }
