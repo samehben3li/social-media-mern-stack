@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import { Users } from "../../dummyData"
 import Online from "../online/Online";
 import "./right.css"
 
 export default function Right({ user }) {
+
+    const {user:currentUser} = useContext(AuthContext)
 
     const HomeRight = () => {
         return(
@@ -24,6 +28,9 @@ export default function Right({ user }) {
     const ProfileRight = () => {
         return(
             <>
+                { user._id === currentUser._id &&
+                "btn flower"
+                }
                 <h4 className="rightTitle">User information</h4>
                 <div className="rightInfo">
                     <div className="infoItem">

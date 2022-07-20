@@ -41,7 +41,7 @@ export default function Post({post}){
                 <div className="postTop">
                     <div className="topLeft">
                         <Link to={`profile/${user.username}`}>
-                            <img src={ user.image?PF+user.image: PF+"person/1.png" } alt="" className="profileImg" />
+                            <img src={ user.image?PF+user.image: "/assets/default-avatar.jpg" } alt="" className="profileImg" />
                         </Link>    
                         <span className="userName">
                             { user.username }
@@ -54,7 +54,7 @@ export default function Post({post}){
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img src={PF+post.img} alt="" className="postImg" />
+                    <img src={PF+post?.img} alt="" className="postImg" />
                 </div>
                 <div className="postBottom">
                     <div className="bottomLeft">
