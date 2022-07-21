@@ -18,8 +18,8 @@ function Login() {
         <div className="login">
             <div className="loginWrapper">
                 <div className="loginLeft">
-                    <h3 className="loginLogo">SamehSocial</h3>
-                    <span className="loginDesc">Connect With friends and the world around you on SamehSocial</span>
+                    <h3 className="loginLogo">KnowerSocial</h3>
+                    <span className="loginDesc">Connect With friends and the world around you on KnowerSocial</span>
                 </div>
                 <div className="loginRight">
                     <form className="box" onSubmit={handleClick}>
