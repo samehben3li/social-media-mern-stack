@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
-import { Follow } from "../../context/AuthActions";
+import { useContext,useState,useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Users } from "../../dummyData"
 import Online from "../online/Online";
@@ -29,30 +28,43 @@ export default function Right({ user }) {
 
     const ProfileRight = () => {
 
+        const [isFollow, setIsFollow] = useState(false)
+
+        const getIsFollow = async () => {
+            try {
+                const res = await axios.get("/users/"+currentUser._id+"/isfollow/"+user._id)
+                setIsFollow(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
         const handleFollow = async () => {
-            if (currentUser.followings.includes(user._id)){
+            if (isFollow){
                 try {
                     await axios.put("/users/"+user._id+"/unfollow",{userId: currentUser._id})
-                    currentUser.followings = currentUser.followings.filter(id=>id!==user._id)
-                    dispatch(Follow(currentUser))
+                    getIsFollow()
                 } catch (err) {
                     console.log(err)
                 }
             }else{
                 try {
                     await axios.put("/users/"+user._id+"/follow",{userId: currentUser._id})
-                    currentUser.followings = [...currentUser.followings,user._id]
-                    dispatch(Follow(currentUser))
+                    getIsFollow()
                 } catch (err) {
                     console.log(err)
                 }
             }
         }
 
+        useEffect(() => {
+            getIsFollow()
+        }, [currentUser,user])
+
         return(
             <>
                 { user._id !== currentUser._id &&
-                <button className="btnFollow" onClick={handleFollow}>{ currentUser.followings.includes(user._id) ? "Unfollow -" : "Follow +"  }</button>
+                <button className="btnFollow" onClick={handleFollow}>{ isFollow ? "Unfollow -" : "Follow +"  }</button>
                 }
                 <h4 className="rightTitle">User information</h4>
                 <div className="rightInfo">

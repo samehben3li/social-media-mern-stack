@@ -1,41 +1,51 @@
 import axios from "axios"
-import { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
-import { Follow } from "../../context/AuthActions"
+import { useState,useEffect } from "react"
+import { Link } from "react-router-dom"
 import "./sugs.css"
 
 const Sugs = ({u,user}) => {
 
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
-    const { dispatch } = useContext(AuthContext)
+    const [isFollow, setIsFollow] = useState(false)
 
     const handleFollow = async()=>{
         if (user.followings.includes(u._id)){
             try {
                 await axios.put("/users/"+u._id+"/unfollow",{userId: user._id})
-                user.followings = user.followings.filter(id=>id!==u._id)
-                dispatch(Follow(user))
+                getIsFollow()
             } catch (err) {
                 console.log(err)
             }
         }else{
             try {
                 await axios.put("/users/"+u._id+"/follow",{userId: user._id})
-                user.followings = [...user.followings,u._id]
-                dispatch(Follow(user))
+                getIsFollow()
             } catch (err) {
                 console.log(err)
             }
         }
     }
 
+    const getIsFollow = async () => {
+        try {
+            const res = await axios.get("/users/"+user._id+"/isfollow/"+u._id)
+            setIsFollow(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(()=>{
+        getIsFollow()
+    },[user,u])
+
   return (
     <li className="item" >
-        <div className="itemInfo">
+        <Link to={`/profile/${u.username}`} style={{textDecoration: "none", color: "inherit"}} className="itemInfo">
             <img src={ u.image ? PF + u.image : "/assets/default-avatar.jpg" } alt="" className="itemImg" />
             <span className="itemText">{u.username}</span>
-        </div>
-        <button className="itemBtn" onClick={handleFollow}>{ user.followings.includes(u._id) ? "Unfollow -" : "Follow +"}</button>
+        </Link>
+        <button className="itemBtn" onClick={handleFollow}>{ isFollow ? "Unfollow -" : "Follow +"}</button>
     </li>
   )
 }

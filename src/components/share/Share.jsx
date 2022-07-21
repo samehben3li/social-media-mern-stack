@@ -1,6 +1,7 @@
 import { useContext,useState } from "react";
 import { AuthContext } from '../../context/AuthContext';
 import axios from "axios"
+import { useHistory } from "react-router-dom"
 import "./share.css"
 
 export default function Share(){
@@ -8,6 +9,7 @@ export default function Share(){
     const { user } = useContext(AuthContext)
     const [desc,setDesc] = useState("")
     const [img, setImg] = useState(null)
+    const navigate = useHistory()
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
     const handleShare = async e =>{
@@ -30,6 +32,9 @@ export default function Share(){
         }
         try {
             await axios.post("/posts",newPost)
+            setDesc("")
+            setImg(null)
+            navigate.push("/")
         } catch (err) {
             console.log(err)
         }

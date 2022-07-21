@@ -14,8 +14,3 @@ export const LoginFailure = () => ({
 export const Logout = () => ({
     type: "LOGOUT"
 })
-
-export const Follow = (user) => ({
-    type: "FOLLOW",
-    payload: user
-})
