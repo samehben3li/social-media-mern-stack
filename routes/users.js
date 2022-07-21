@@ -83,6 +83,15 @@ router.put("/:id/follow", async(req, res) => {
     }
 })
 
+router.get("/:userId1/isfollow/:userId2", async(req, res) => {
+    try {
+        const isFollow = await User.findOne({ _id: req.params.userId1, followings: { $in: [req.params.userId2] } })
+        res.status(200).json(isFollow ? true : false)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
 router.put("/:id/unfollow", async(req, res) => {
     if (req.body.userId !== req.params.id) {
         try {
