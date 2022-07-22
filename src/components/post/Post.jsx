@@ -40,8 +40,8 @@ export default function Post({post}){
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="topLeft">
-                        <Link to={`profile/${user.username}`}>
-                            <img src={ user.image?PF+user.image: "/assets/default-avatar.jpg" } alt="" className="profileImg" />
+                        <Link to={`profile/${user?.username}`}>
+                            <img src={ user?.image?PF+user.image: "/assets/default-avatar.jpg" } alt="" className="profileImg" />
                         </Link>    
                         <span className="userName">
                             { user.username }

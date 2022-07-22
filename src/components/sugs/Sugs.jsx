@@ -9,21 +9,20 @@ const Sugs = ({u,user}) => {
     const [isFollow, setIsFollow] = useState(false)
 
     const handleFollow = async()=>{
-        if (user.followings.includes(u._id)){
+        if (isFollow){
             try {
                 await axios.put("/users/"+u._id+"/unfollow",{userId: user._id})
-                getIsFollow()
             } catch (err) {
                 console.log(err)
             }
         }else{
             try {
                 await axios.put("/users/"+u._id+"/follow",{userId: user._id})
-                getIsFollow()
             } catch (err) {
                 console.log(err)
             }
         }
+        getIsFollow()
     }
 
     const getIsFollow = async () => {
