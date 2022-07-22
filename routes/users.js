@@ -15,8 +15,9 @@ router.put("/:id", async(req, res) => {
         try {
             const user = await User.findByIdAndUpdate(req.params.id, {
                 $set: req.body
-            })
-            res.status(200).json("account has been updated")
+            }, { new: true })
+            const { password, ...others } = user._doc
+            res.status(200).json(others)
         } catch (err) {
             res.status(500).json(err)
         }
@@ -29,7 +30,7 @@ router.delete("/:id", async(req, res) => {
     if (req.body.userId == req.params.id || req.body.isAdmin) {
         try {
             const user = await User.deleteOne({ _id: req.params.id })
-            res.status(200).json("account has been updated")
+            res.status(200).json("account has been deleted")
         } catch (err) {
             res.status(500).json(err)
         }
