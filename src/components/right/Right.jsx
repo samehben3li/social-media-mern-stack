@@ -109,7 +109,7 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
 
         useEffect(() => {
             getIsFollow()
-        }, [currentUser,user])
+        }, [])
 
         return(
             <>

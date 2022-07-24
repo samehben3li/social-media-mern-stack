@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext"
 
 export default function Post({post}){
 
-    const [like,setLike]=useState(post.likes.length)
+    const [like,setLike]=useState(0)
     const [isLike,setIsLike]=useState(false)
     const [user,setUser] = useState({})
     const {user:currentUser } = useContext(AuthContext)
@@ -24,8 +24,9 @@ export default function Post({post}){
     }
 
     useEffect(()=>{
-        setIsLike(post.likes.includes(currentUser._id))
-    },[currentUser._id,post.likes])
+        setIsLike(post ? post?.likes.includes(currentUser._id) : false)
+        setLike(post ? post?.likes.length : 0)
+    },[currentUser._id,post])
 
     useEffect(()=>{
         const fetchUser = async ()=>{
@@ -33,29 +34,31 @@ export default function Post({post}){
             setUser(res.data)
         }
         fetchUser()
-    },[post.userId])
+    },[post])
 
     return(
         <div className="post">
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="topLeft">
-                        <Link to={`profile/${user?.username}`}>
+                        <Link to={`/profile/${user?.username}`} style={{textDecoration: "none", color: "inherit",display: "flex", alignItems:"center"}}>
                             <img src={ user?.image?PF+user.image: "/assets/default-avatar.jpg" } alt="" className="profileImg" />
+                            <span className="userName">
+                                { user.username }
+                            </span>
                         </Link>    
-                        <span className="userName">
-                            { user.username }
-                        </span>
                         <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="topRight">
                         <span>...</span>
                     </div>
                 </div>
-                <div className="postCenter">
-                    <span className="postText">{post?.desc}</span>
-                    <img src={PF+post?.img} alt="" className="postImg" />
-                </div>
+                <Link to={`/posts/${post._id}`} style={{textDecoration: "none", color: "inherit"}}>
+                    <div className="postCenter">
+                        <span className="postText">{post?.desc}</span>
+                        <img src={PF+post?.img} alt="" className="postImg" />
+                    </div>
+                </Link>
                 <div className="postBottom">
                     <div className="bottomLeft">
                         <img className="like" src="/assets/like.png" onClick={likeHandler} alt="" />
@@ -63,7 +66,7 @@ export default function Post({post}){
                         <span className="likeCount">{ like } people like it</span>
                     </div>
                     <div className="bottomRight">
-                        <span className="comment">{ post.comment } comments</span>
+                        <span className="comment">{ post.comments.length } comments</span>
                     </div>
                 </div>
             </div>

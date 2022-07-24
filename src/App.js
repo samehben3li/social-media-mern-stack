@@ -10,6 +10,7 @@ import Register from './pages/register/Register'
 import Profile from "./pages/profile/Profile"
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import Single from "./pages/single/Single";
 
 function App() {
 
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/profile/:username">
             <Profile />
+          </Route>
+          <Route path="/posts/:id">
+            <Single />
           </Route>
       </Switch>
     </Router>
