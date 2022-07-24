@@ -5,6 +5,7 @@ const helmet = require("helmet")
 const morgan = require("morgan")
 const path = require("path")
 const multer = require("multer")
+    /* const cors = require("cors") */
 
 const userRoute = require("./routes/users")
 const authRoute = require("./routes/auth")
@@ -23,6 +24,9 @@ app.use(express.json())
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 app.use(helmet())
 app.use(morgan("common"))
+    /* app.use(cors({
+        origin: "http://localhost:3000/"
+    })) */
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

@@ -51,6 +51,15 @@ router.get("/", async(req, res) => {
     }
 })
 
+router.get("/:id", async(req, res) => {
+    try {
+        const user = await User.findById(req.params.id)
+        res.status(200).json(user)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
 router.get("/sugs/:id", async(req, res) => {
     try {
         const user = await User.findById(req.params.id)
