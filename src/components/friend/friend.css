@@ -1,13 +1,42 @@
-.friend{
+.friend {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.friendImg{
+.friendLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.friendImg {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
+}
+
+.friendName {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.followingImg {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
 }

@@ -1,4 +1,3 @@
-import { Users } from "../../dummyData";
 import { useState,useEffect,useContext } from "react"
 import axios from "axios"
 import Friend from "../friend/Friend";
@@ -10,6 +9,7 @@ export default function Left(){
 
     const [sugs, setSugs] = useState([])
     const { user } = useContext(AuthContext)
+    const [friends, setFriends] = useState([])
 
     const getSugs = async () => {
         try {
@@ -20,8 +20,18 @@ export default function Left(){
         }
     }
 
+    const getFriend = async() => {
+        try {
+            const res = await axios.get(`/users/friends/${user._id}`)
+            setFriends(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         getSugs()
+        getFriend()
     }, [])
 
     return(
@@ -69,8 +79,8 @@ export default function Left(){
                 <button className="button">Show More</button>
                 <hr className="hr"/>
                 <ul className="friendList">
-                    { Users.map(u=>{
-                        return <Friend key={u.id} user={u} />
+                    { friends.map(friendId=>{
+                        return <Friend key={friendId} friendId={friendId} position="left" />
                     }) }
                 </ul>
             </div>

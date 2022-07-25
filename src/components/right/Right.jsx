@@ -3,6 +3,7 @@ import { useContext,useState,useEffect } from "react";
 import { UpdateUserSuccess } from "../../context/AuthActions";
 import { AuthContext } from "../../context/AuthContext";
 import { Users } from "../../dummyData"
+import Friend from "../friend/Friend";
 import Online from "../online/Online";
 import "./right.css"
 
@@ -34,6 +35,7 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
         const [from, setFrom] = useState(user.from)
         const [email, setEmail] = useState(user.email)
         const [password, setPassword] = useState("")
+        const [friends, setFriends] = useState([])
 
         const getIsFollow = async () => {
             try {
@@ -107,8 +109,18 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
             }
         }
 
+        const getFriends = async () => {
+            try {
+                const res = await axios.get("/users/friends/"+user._id)
+                setFriends(res.data.slice(0,6))
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
         useEffect(() => {
             getIsFollow()
+            getFriends()
         }, [])
 
         return(
@@ -155,30 +167,10 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
                 </div>
                 <h4 className="rightTitle">User friends</h4>
                 <div className="followings">
-                    <div className="following">
-                        <img src="/assets/person/1.jpeg" alt="" className="followingImg" />
-                        <span className="followingName">Sameh Benali</span>
-                    </div>
-                    <div className="following">
-                        <img src="/assets/person/2.jpeg" alt="" className="followingImg" />
-                        <span className="followingName">Sameh Benali</span>
-                    </div>
-                    <div className="following">
-                        <img src="/assets/person/3.jpeg" alt="" className="followingImg" />
-                        <span className="followingName">Sameh Benali</span>
-                    </div>
-                    <div className="following">
-                        <img src="/assets/person/4.jpeg" alt="" className="followingImg" />
-                        <span className="followingName">Sameh Benali</span>
-                    </div>
-                    <div className="following">
-                        <img src="/assets/person/5.jpeg" alt="" className="followingImg" />
-                        <span className="followingName">Sameh Benali</span>
-                    </div>
-                    <div className="following">
-                        <img src="/assets/person/6.jpeg" alt="" className="followingImg" />
-                        <span className="followingName">Sameh Benali</span>
-                    </div>
+                    { friends.map(friendId => (
+                        <Friend key={friendId} friendId={friendId} position="right" />
+                    ))
+                    }
                 </div>
             </>
         )
