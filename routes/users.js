@@ -73,6 +73,20 @@ router.get("/sugs/:id", async(req, res) => {
     }
 })
 
+router.get("/friends/:id", async(req, res) => {
+    try {
+        const user = await User.findById(req.params.id)
+        try {
+            const friends = user.followings.filter(u => user.followers.includes(u))
+            res.status(200).json(friends)
+        } catch (err) {
+            res.status(500).json(err)
+        }
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
 router.put("/:id/follow", async(req, res) => {
     if (req.body.userId !== req.params.id) {
         try {
