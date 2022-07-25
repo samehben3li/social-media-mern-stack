@@ -1,0 +1,23 @@
+.notificationContaine {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-bottom: 1px solid lightgray;
+    text-decoration: none;
+    color: inherit;
+}
+
+.notificationContaine:last-child {
+    border: none;
+}
+
+.nUserImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}

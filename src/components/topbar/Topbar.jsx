@@ -2,11 +2,13 @@ import { useContext,useState } from "react";
 import { Link } from "react-router-dom"
 import { AuthContext } from '../../context/AuthContext';
 import Popup from "../popup/Popup";
+import Notifications from "../notifications/Notifications"
 import "./topbar.css"
 
 export default function Topbar(){
 
     const [activePopup, setActivePopup] = useState(false)
+    const [activeNotification, setActiveNotification] = useState(false)
     const { user } =useContext(AuthContext)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
@@ -36,7 +38,7 @@ export default function Topbar(){
                         <i className="fa-solid fa-message iconImg"></i>
                         <span className="iconBadge">1</span>
                     </div>
-                    <div className="iconeItem">
+                    <div className="iconeItem" onClick={()=>setActiveNotification(!activeNotification)}>
                         <i className="fa-solid fa-bell iconImg"></i>
                         <span className="iconBadge">1</span>
                     </div>
@@ -44,6 +46,7 @@ export default function Topbar(){
                 <img src={user.image ? PF+user.image : "/assets/default-avatar.jpg" } alt="" className="imgProfile" onClick={()=>setActivePopup(!activePopup)} />
             </div>
             <Popup activePopup={activePopup} />
+            <Notifications activeNotification={activeNotification} />
         </div>
     );
 }
