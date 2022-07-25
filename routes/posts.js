@@ -31,6 +31,15 @@ router.put("/comment/:postId", async(req, res) => {
         const postComment = await Post.findByIdAndUpdate(req.params.postId, {
             $push: { comments: {...req.body, createdAt: Date.now() } }
         }, { new: true })
+        await User.findByIdAndUpdate(postComment.userId, {
+            $push: {
+                notifications: {
+                    type: "comment",
+                    userId: req.body.userId,
+                    postId: req.params.postId
+                }
+            }
+        })
         res.status(200).json(postComment)
     } catch (err) {
         res.status(500).json(err)
@@ -56,9 +65,27 @@ router.put("/:id/like", async(req, res) => {
         const post = await Post.findById(req.params.id)
         if (!post.likes.includes(req.body.userId)) {
             await post.updateOne({ $push: { likes: req.body.userId } })
+            await User.findByIdAndUpdate(post.userId, {
+                $push: {
+                    notifications: {
+                        type: "like",
+                        userId: req.body.userId,
+                        postId: req.params.id
+                    }
+                }
+            })
             res.status(200).json("the post has been liked!")
         } else {
             await post.updateOne({ $pull: { likes: req.body.userId } })
+            await User.findByIdAndUpdate(post.userId, {
+                $pull: {
+                    notifications: {
+                        type: "like",
+                        userId: req.body.userId,
+                        postId: req.params.id
+                    }
+                }
+            })
             res.status(200).json("the post has been disliked")
         }
     } catch (err) {

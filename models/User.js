@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         min: 6,
         required: true
     },
-    image:{
+    image: {
         type: String,
         default: ""
     },
@@ -51,10 +51,14 @@ const userSchema = new mongoose.Schema({
     },
     relationship: {
         type: Number,
-        enum: [1,2,3]
+        enum: [1, 2, 3]
+    },
+    notifications: {
+        type: Array,
+        default: []
     }
-},{
+}, {
     timestamps: true
 })
 
-module.exports = mongoose.model("User",userSchema)
+module.exports = mongoose.model("User", userSchema)
