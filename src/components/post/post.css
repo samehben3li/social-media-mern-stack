@@ -66,8 +66,15 @@
     cursor: pointer;
 }
 
+.likeIcon {
+    font-size: 24px;
+    cursor: pointer;
+    color: crimson;
+}
+
 .likeCount {
     font-size: 15px;
+    margin-left: 10px;
 }
 
 .comment {

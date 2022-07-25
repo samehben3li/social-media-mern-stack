@@ -13,7 +13,7 @@ export default function Post({post}){
     const {user:currentUser } = useContext(AuthContext)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
-    const likeHandler = async () => {
+    const handleLike = async () => {
         try{
             await axios.put("/posts/"+post._id+"/like",{userId: currentUser._id})
         }catch(err){
@@ -61,9 +61,15 @@ export default function Post({post}){
                 </Link>
                 <div className="postBottom">
                     <div className="bottomLeft">
-                        <img className="like" src="/assets/like.png" onClick={likeHandler} alt="" />
-                        <img className="like" src="/assets/heart.png" onClick={likeHandler}  alt="" />
-                        <span className="likeCount">{ like } people like it</span>
+                        { isLike 
+                        ? <i className="fa-solid fa-heart likeIcon" onClick={handleLike}></i>
+                        : <i className="fa-regular fa-heart likeIcon" onClick={handleLike}></i>
+                        }
+                        <span className="likeCount">
+                            { isLike 
+                            ? `you ${like > 1 ? `${like-1} and people like it` : " like it"}`
+                            : `${like} people like it` }
+                        </span>
                     </div>
                     <div className="bottomRight">
                         <span className="comment">{ post.comments.length } comments</span>
