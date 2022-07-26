@@ -8,13 +8,30 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login"
 import Register from './pages/register/Register'
 import Profile from "./pages/profile/Profile"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Single from "./pages/single/Single";
+import axios from "axios";
+import { LoginSuccess } from "./context/AuthActions";
 
 function App() {
 
-  const {user } = useContext(AuthContext)
+  const {user,dispatch } = useContext(AuthContext)
+
+  const getUser = async () =>{
+    try {
+      const res = await axios.get(`/users/${user._id}`)
+      dispatch(LoginSuccess(res.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    if (user){
+      getUser()
+    }
+  }, [])
   
   return (
     <Router>
