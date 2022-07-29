@@ -40,6 +40,9 @@ app.use("/api/upload", upload.single("file"), (req, res) => {
     res.status(200).json("file has been upload ...")
 })
 app.use("/api/users", userRoute)
+app.get("/test", (req, res) => {
+    res.send("start")
+})
 app.use("/api/auth", authRoute)
 app.use("/api/posts", postRoute)
 
