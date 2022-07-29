@@ -11,13 +11,13 @@ const Sugs = ({u,user}) => {
     const handleFollow = async()=>{
         if (isFollow){
             try {
-                await axios.put("/users/"+u._id+"/unfollow",{userId: user._id})
+                await axios.put("https://knowersocial.herokuapp.com/api/users/"+u?._id+"/unfollow",{userId: user?._id})
             } catch (err) {
                 console.log(err)
             }
         }else{
             try {
-                await axios.put("/users/"+u._id+"/follow",{userId: user._id})
+                await axios.put("https://knowersocial.herokuapp.com/api/users/"+u?._id+"/follow",{userId: user?._id})
             } catch (err) {
                 console.log(err)
             }
@@ -27,7 +27,7 @@ const Sugs = ({u,user}) => {
 
     const getIsFollow = async () => {
         try {
-            const res = await axios.get("/users/"+user._id+"/isfollow/"+u._id)
+            const res = await axios.get("https://knowersocial.herokuapp.com/api/users/"+user?._id+"/isfollow/"+u?._id)
             setIsFollow(res.data)
         } catch (err) {
             console.log(err)

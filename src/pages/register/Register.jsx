@@ -25,8 +25,10 @@ function Register() {
                 email: email.current.value
             }
             try{
-                const res = await axios.post("/auth/register",user)
-                history.push("/login")
+                const res = await axios.post("https://knowersocial.herokuapp.com/api/auth/register",user)
+                if (res.data) {
+                    history.push("/login")
+                }
             }catch(err){
                 console.log(err);
             }

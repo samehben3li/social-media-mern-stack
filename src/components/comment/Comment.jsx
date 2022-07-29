@@ -10,7 +10,7 @@ const Comment = ({comment}) => {
   useEffect(() => {
     const getUserComment = async () => {
       try {
-        const res = await axios.get("/users/"+comment.userId)
+        const res = await axios.get("https://knowersocial.herokuapp.com/api/users/"+comment.userId)
         setCommentUser(res.data)
       } catch (err) {
         console.log(err)

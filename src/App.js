@@ -20,7 +20,7 @@ function App() {
 
   const getUser = async () =>{
     try {
-      const res = await axios.get(`/users/${user._id}`)
+      const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${user._id}`)
       dispatch(LoginSuccess(res.data))
     } catch (err) {
       console.log(err)

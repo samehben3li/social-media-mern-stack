@@ -10,7 +10,7 @@ function Friend({ friendId,position }) {
 
   const getFriend = async () => {
     try {
-      const res = await axios.get(`/users/${friendId}`)
+      const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${friendId}`)
       setFriend(res.data)
     } catch (err) {
       console.log(err)

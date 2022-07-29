@@ -39,7 +39,7 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
 
         const getIsFollow = async () => {
             try {
-                const res = await axios.get("/users/"+currentUser._id+"/isfollow/"+user._id)
+                const res = await axios.get("https://knowersocial.herokuapp.com/api/users/"+currentUser._id+"/isfollow/"+user._id)
                 setIsFollow(res.data)
             } catch (err) {
                 console.log(err)
@@ -49,13 +49,13 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
         const handleFollow = async () => {
             if (isFollow){
                 try {
-                    await axios.put("/users/"+user._id+"/unfollow",{userId: currentUser._id})
+                    await axios.put("https://knowersocial.herokuapp.com/api/users/"+user._id+"/unfollow",{userId: currentUser._id})
                 } catch (err) {
                     console.log(err)
                 }
             }else{
                 try {
-                    await axios.put("/users/"+user._id+"/follow",{userId: currentUser._id})
+                    await axios.put("https://knowersocial.herokuapp.com/api/users/"+user._id+"/follow",{userId: currentUser._id})
                 } catch (err) {
                     console.log(err)
                 }
@@ -82,7 +82,7 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
                 data.append("file",imgCover)
                 updatedUser.imgCover = filename
                 try{
-                    await axios.post("/upload",data)
+                    await axios.post("https://knowersocial.herokuapp.com/api/upload",data)
                 }catch(err){
                     console.log(err)
                 }
@@ -94,13 +94,13 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
                 data.append("file",image)
                 updatedUser.image = filename
                 try{
-                    await axios.post("/upload",data)
+                    await axios.post("https://knowersocial.herokuapp.com/api/upload",data)
                 }catch(err){
                     console.log(err)
                 }
             }
             try {
-                const res = await axios.put("/users/"+currentUser._id,updatedUser)
+                const res = await axios.put("https://knowersocial.herokuapp.com/api/users/"+currentUser._id,updatedUser)
                 dispatch(UpdateUserSuccess(res.data))
                 setUser(res.data)
                 setEditMode(false)
@@ -111,7 +111,7 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
 
         const getFriends = async () => {
             try {
-                const res = await axios.get("/users/friends/"+user._id)
+                const res = await axios.get("https://knowersocial.herokuapp.com/api/users/friends/"+user?._id)
                 setFriends(res.data.slice(0,6))
             } catch (err) {
                 console.log(err)
@@ -120,7 +120,9 @@ export default function Right({ user,setUser,editMode,setEditMode,imgCover,image
 
         useEffect(() => {
             getIsFollow()
-            getFriends()
+            if (user){
+                getFriends()
+            }
         }, [])
 
         return(

@@ -25,13 +25,13 @@ export default function Share(){
             data.append("file",img)
             newPost.img = filename
             try {
-                await axios.post("/upload",data)
+                await axios.post("https://knowersocial.herokuapp.com/api/upload",data)
             } catch (err) {
                 console.log(err)
             }
         }
         try {
-            await axios.post("/posts",newPost)
+            await axios.post("https://knowersocial.herokuapp.com/api/posts",newPost)
             setDesc("")
             setImg(null)
             navigate.push("/")

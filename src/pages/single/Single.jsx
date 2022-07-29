@@ -24,7 +24,7 @@ const Single = () => {
             history.push("/")
         }
         try {
-            const res = await axios.put("/posts/comment/"+post._id,{
+            const res = await axios.put("https://knowersocial.herokuapp.com/api/posts/comment/"+post._id,{
                 userId: user._id,
                 desc
             })
@@ -38,7 +38,7 @@ const Single = () => {
     useEffect(() => {
         const getPost = async () => {
             try {
-                const res = await axios.get("/posts/"+id)
+                const res = await axios.get("https://knowersocial.herokuapp.com/api/posts/"+id)
                 setPost(res.data)
             } catch (err) {
                 console.log(err)

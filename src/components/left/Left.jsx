@@ -13,7 +13,7 @@ export default function Left(){
 
     const getSugs = async () => {
         try {
-            const res = await axios.get("/users/sugs/"+user._id)
+            const res = await axios.get("https://knowersocial.herokuapp.com/api/users/sugs/"+user._id)
             setSugs(res.data.filter(u=>u._id!==user._id))
         } catch (err) {
             console.log(err)
@@ -22,7 +22,7 @@ export default function Left(){
 
     const getFriend = async() => {
         try {
-            const res = await axios.get(`/users/friends/${user._id}`)
+            const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/friends/${user?._id}`)
             setFriends(res.data)
         } catch (err) {
             console.log(err)
@@ -31,49 +31,15 @@ export default function Left(){
 
     useEffect(() => {
         getSugs()
-        getFriend()
+        if (user){
+            getFriend()
+        }
     }, [])
 
     return(
         <div className="left">
             <div className="wrapper">
                 <ul className="list">
-                    {/* <li className="item">
-                        <i class="fa-solid fa-rss icon"></i>
-                        <span className="text">feed</span>
-                    </li>
-                    <li className="item">
-                        <i class="fa-solid fa-message icon"></i>
-                        <span className="text">chat</span>
-                    </li>
-                    <li className="item">
-                        <div className="icon">V</div>
-                        <span className="text">videos</span>
-                    </li> 
-                    <li className="item">
-                        <i class="fa-solid fa-people-group icon"></i>
-                        <span className="text">groups</span>
-                    </li>
-                    <li className="item">
-                        <i class="fa-solid fa-bookmark icon"></i>
-                        <span className="text">bookmarks</span>
-                    </li>
-                    <li className="item">
-                        <i class="fa-solid fa-circle-info icon"></i>
-                        <span className="text">questions</span>
-                    </li>
-                    <li className="item">
-                        <i class="fa-solid fa-cart-shopping icon"></i>
-                        <span className="text">Shopping</span>
-                    </li>
-                    <li className="item">
-                        <i class="fa-solid fa-calendar-check icon"></i>
-                        <span className="text">events</span>
-                    </li>
-                    <li className="item">
-                        <i class="fa-solid fa-graduation-cap icon"></i>
-                        <span className="text">courses</span>
-                    </li> */}
                     { sugs?.map((u)=>(<Sugs key={u._id} u={u} user={user} />)) }
                 </ul>
                 <button className="button">Show More</button>
@@ -87,5 +53,3 @@ export default function Left(){
         </div>
     );
 }
-
-//_id:"62d7363238cadffa1cab7909"

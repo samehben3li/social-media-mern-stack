@@ -11,7 +11,7 @@ const Notification = ({notification}) => {
   useEffect(() => {
     const getNotificationUser = async () => {
       try {
-        const res = await axios.get(`/users/${notification.userId}`)
+        const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${notification.userId}`)
         setNotifcationUser(res.data)
       } catch (err) {
         console.log(err)

@@ -15,7 +15,7 @@ export default function Post({post}){
 
     const handleLike = async () => {
         try{
-            await axios.put("/posts/"+post._id+"/like",{userId: currentUser._id})
+            await axios.put("https://knowersocial.herokuapp.com/api/posts/"+post._id+"/like",{userId: currentUser._id})
         }catch(err){
             console.log(err);
         }
@@ -30,7 +30,7 @@ export default function Post({post}){
 
     useEffect(()=>{
         const fetchUser = async ()=>{
-            const res = await axios.get(`/users?userid=${post.userId}`)
+            const res = await axios.get(`https://knowersocial.herokuapp.com/api/users?userid=${post.userId}`)
             setUser(res.data)
         }
         fetchUser()
