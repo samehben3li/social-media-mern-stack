@@ -22,10 +22,10 @@ const Sugs = ({u,user}) => {
                 console.log(err)
             }
         }
-        getIsFollow()
+        getIsFollow2()
     }
 
-    const getIsFollow = async () => {
+    const getIsFollow2 = async () => {
         try {
             const res = await axios.get("https://knowersocial.herokuapp.com/api/users/"+user?._id+"/isfollow/"+u?._id)
             setIsFollow(res.data)
@@ -35,6 +35,14 @@ const Sugs = ({u,user}) => {
     }
 
     useEffect(()=>{
+        const getIsFollow = async () => {
+            try {
+                const res = await axios.get("https://knowersocial.herokuapp.com/api/users/"+user?._id+"/isfollow/"+u?._id)
+                setIsFollow(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
         getIsFollow()
     },[user,u])
 

@@ -8,18 +8,19 @@ function Friend({ friendId,position }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
   const [friend, setFriend] = useState({})
 
-  const getFriend = async () => {
-    try {
-      const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${friendId}`)
-      setFriend(res.data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  
 
   useEffect(() => {
+    const getFriend = async () => {
+      try {
+        const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${friendId}`)
+        setFriend(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
     getFriend()
-  }, [])
+  }, [friendId])
 
   return (
     <>

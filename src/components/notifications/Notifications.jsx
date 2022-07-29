@@ -9,20 +9,20 @@ const Notifications = ({activeNotification}) => {
 
   const { user,dispatch } = useContext(AuthContext)
 
-  const getNotifications = async () => {
-    try {
-      const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${user._id}`)
-      dispatch(LoginSuccess(res.data))
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   useEffect(() => {
+    const getNotifications = async () => {
+      try {
+        const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${user._id}`)
+        dispatch(LoginSuccess(res.data))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  
     if (activeNotification){
       getNotifications()
     }
-  }, [activeNotification])
+  }, [activeNotification,user._id,dispatch])
 
   return (
     <div className={`notificationsContainer ${activeNotification ? "active" : ""}`}>

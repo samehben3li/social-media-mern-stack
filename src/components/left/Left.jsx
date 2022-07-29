@@ -11,30 +11,29 @@ export default function Left(){
     const { user } = useContext(AuthContext)
     const [friends, setFriends] = useState([])
 
-    const getSugs = async () => {
-        try {
-            const res = await axios.get("https://knowersocial.herokuapp.com/api/users/sugs/"+user._id)
-            setSugs(res.data.filter(u=>u._id!==user._id))
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    const getFriend = async() => {
-        try {
-            const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/friends/${user?._id}`)
-            setFriends(res.data)
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
     useEffect(() => {
+        const getSugs = async () => {
+            try {
+                const res = await axios.get("https://knowersocial.herokuapp.com/api/users/sugs/"+user._id)
+                setSugs(res.data.filter(u=>u._id!==user._id))
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    
+        const getFriend = async() => {
+            try {
+                const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/friends/${user?._id}`)
+                setFriends(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
         getSugs()
         if (user){
             getFriend()
         }
-    }, [])
+    }, [user])
 
     return(
         <div className="left">

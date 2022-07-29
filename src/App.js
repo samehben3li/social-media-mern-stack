@@ -18,20 +18,19 @@ function App() {
 
   const {user,dispatch } = useContext(AuthContext)
 
-  const getUser = async () =>{
-    try {
-      const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${user._id}`)
-      dispatch(LoginSuccess(res.data))
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   useEffect(() => {
+    const getUser = async () =>{
+      try {
+        const res = await axios.get(`https://knowersocial.herokuapp.com/api/users/${user?._id}`)
+        dispatch(LoginSuccess(res.data))
+      } catch (err) {
+        console.log(err)
+      }
+    }
     if (user){
       getUser()
     }
-  }, [])
+  }, [user,dispatch])
   
   return (
     <Router>
